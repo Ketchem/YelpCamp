@@ -6,9 +6,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs")
 
 var campgrounds = [
-    {name:"Salmon Creek", image: "https://www.photosforclass.com/download/flickr-1430198323"},
-    {name:"Granite Hill", image:"https://www.photosforclass.com/download/flickr-1342367857"},
-    {name:"Mountain Goat Pass", image:"https://www.photosforclass.com/download/flickr-7842069486"}
+    {name:"Salmon Creek", image: "https://www.reserveamerica.com/webphotos/racms/articles/images/bca19684-d902-422d-8de2-f083e77b50ff_image2_GettyImages-677064730.jpg"},
+    {name:"Granite Hill", image:"https://www.discovermoab.com/wp-content/uploads/2017/10/camping-blm.jpg"},
+    {name:"Mountain Goat Pass", image:"https://travel.home.sndimg.com/content/dam/images/travel/fullrights/2016/01/14/national-park-camping/camping-glacier-national-park-camping.jpg.rend.hgtvcom.966.725.suffix/1491593018562.jpeg"}
 ];
 
 
