@@ -1,9 +1,19 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    app = express(),
+    mongoose = require("mongoose");
 
+mongoose.connect("mongodb://localhost/YelpCamp", {useNewUrlParser:true});
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs")
+
+//Schema Setup
+var campgroundSchema = new mongoose.Schema({
+    name: String, 
+    image: String
+});
+
+var Campground = mongoose.model("Campground", campgroundSchema);
 
 var campgrounds = [
     {name:"Salmon Creek", image: "https://www.reserveamerica.com/webphotos/racms/articles/images/bca19684-d902-422d-8de2-f083e77b50ff_image2_GettyImages-677064730.jpg"},
