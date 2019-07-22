@@ -15,21 +15,33 @@ var campgroundSchema = new mongoose.Schema({
 
 var Campground = mongoose.model("Campground", campgroundSchema);
 
-var campgrounds = [
-    {name:"Salmon Creek", image: "https://www.reserveamerica.com/webphotos/racms/articles/images/bca19684-d902-422d-8de2-f083e77b50ff_image2_GettyImages-677064730.jpg"},
-    {name:"Granite Hill", image:"https://www.discovermoab.com/wp-content/uploads/2017/10/camping-blm.jpg"},
-    {name:"Mountain Goat Pass", image:"https://travel.home.sndimg.com/content/dam/images/travel/fullrights/2016/01/14/national-park-camping/camping-glacier-national-park-camping.jpg.rend.hgtvcom.966.725.suffix/1491593018562.jpeg"}
-];
-
+// Campground.create({
+//     name:"Granite Hill", 
+//     image:"https://www.discovermoab.com/wp-content/uploads/2017/10/camping-blm.jpg"
+//     }, function(err, campground){
+//         if(err){
+//             console.log(err);
+//         }
+//         else{
+//             console.log(campground)
+//         }
+//     }
+// );
 
 app.get("/", function(req, res){
     res.render("landing");
 });
 
 app.get("/campgrounds", function(req, res){
+    Campground.find({}, function(err, campgrounds){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.render("campgrounds", {campgrounds:campgrounds});
+        }
+    });
 
-
-    res.render("campgrounds", {campgrounds:campgrounds});
 });
 
 app.post("/campgrounds", function(req, res){
@@ -39,11 +51,16 @@ app.post("/campgrounds", function(req, res){
     var image = req.body.image;
     var newCampground = {name:name, image:image};
     
-    // Add to campgrounds array
-    campgrounds.push(newCampground);
-    
-    // Redirect to campgrounds
-    res.redirect("/campgrounds");
+    // Add campground to db
+    Campground.create(newCampground, function(err, newCampground){
+        if(err){
+            console.log(err);
+        }
+        else{
+            // Redirect to campgrounds
+            res.redirect("/campgrounds");
+        }
+    });
 });
 
 app.get("/campgrounds/new", function(req, res){
